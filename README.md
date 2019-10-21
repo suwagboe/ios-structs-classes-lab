@@ -19,13 +19,33 @@ let fred = Giant()
 
 Will these three lines of code run? If not, why not?
 
+```
+Fred = giant 
+```
 ```swift
 fred.name = "Brick"
 fred.weight = 999.2
 fred.homePlanet = "Mars"
 ```
-
 Fix the class definition for `Giant` in the space below so that it **does** work:
+
+```
+this will not compile because the homePlanet is a let and that that makes it immutable
+```
+
+```
+class Giant {
+ var name: String = "Fred"
+ var weight: Double = 340.0
+ var homePlanet: String = "Earth"
+}
+
+let fred = Giant()
+
+fred.name = "Brick"
+fred.weight = 999.2
+fred.homePlanet = "Mars"
+```
 
 
 ## Question 2
@@ -42,15 +62,28 @@ let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 ```
 
 Will these three lines of code run? If so, why not?
+```
+This will print Alien
+```
 
 ```swift
 bilbo.name = "Jake"
 bilbo.height = 1.42
 bilbo.homePlanet = "Saturn"
 ```
-
+ 
 Change the declaration of `bilbo` so that the above three lines of code **do** work:
 
+```
+struct Alien {
+bilbo.name = "Jake"
+bilbo.height = 1.42
+bilbo.homeplanet = "Saturn"
+}
+
+var bilbo = Alien(name: "Bilbo", height: 1.67, homeplanet: "Venus")
+
+```
 
 ## Question 3
 
@@ -65,6 +98,10 @@ jason.name = "Jason"
 
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
 
+```
+The value for both edgar and jason after that code will be both jason because it is completely changing the value and reassigning it. 
+```
+
 
 ## Question 4
 
@@ -78,12 +115,18 @@ charlesFromJupiter.homePlanet = "Jupiter"
 
 What will the value of `charles.homePlanet` be after the above code run? What about the value of `charlesFromJupiter.homePlanet`? Why?
 
+```
+The value of charles.homePlant is pulto
+and the value of charlesFromJupitor. homeplanet is Jupitor becasue they are two completely different names with two completely different variables. So they aren't assigned to one another
+```
+
 
 ## Question 5
 
 Here's a struct that represents a bank account:
 
 ```swift
+
 struct BankAccount {
  var owner: String
  var balance: Double
@@ -96,12 +139,32 @@ struct BankAccount {
  balance -= amount
  }
 }
+
 ```
 
 Does this code work? Why or why not?
 
+```
+No it does not ... 
+When printed this code does not compile because functions inside of a struct need to be mutatilted in order to actually change the values inside of a struct
+```
+
 Fix the `BankAccount` struct so it does work.
 
+```
+struct BankAccount {
+ var owner: String
+ var balance: Double
+
+    mutating func deposit(_ amount: Double) {
+ balance += amount
+ }
+
+    mutating func withdraw(_ amount: Double) {
+ balance -= amount
+ }
+}
+```
 Given the code below (which should incorporate any fixes you made):
 
 ```swift
@@ -112,28 +175,93 @@ joeAccount.withdraw(50.0)
 
 What will the value of `joeAccount.balance` be after the above code runs? What about the value of `joeOtherAccount.balance`? Why?
 
+```
+Joe Account balance is 50 
+but joe other account is 100 and this is because when joe other account was declared it took the value of joe account most resent balance and then when joe's account was withdrawn from it didnt affect the other account because it was already declared 
+```
 
 ## Question 6
 
 a. Write a struct called `Person` that has 3 properties of type `String`: a first name, a last name and a middle name. Have the middle name be optional. Create 2 instances of a `Person`, one with a middle name and one without. Print one of their first names.
 
+```
+struct Person {
+   var firstName: String
+   var middleName: String?
+   var lastName: String
+}
+
+var shaniya = Person(firstName: "Shaniya", lastName: "Uwagboe")
+var morris = Person(firstName: "Morris", middleName: "Poppers", lastName: "Chestnut")
+    
+
+print(shaniya.firstName)
+print(morris.firstName)
+
+```
 
 b. Write a method in `Person` called `fullName` that will return a formatted string of an instance's full name. Call this method on both the instances you created in part a.
 
+```
+    func fullName() -> String{
+    return "\(firstName) \(middleName ?? "" ) \(lastName)"
+    }
+    
+    print(shaniya.fullName())
+    print(morris.fullName())
+```
 
 ## Question 7
 
 a. Create a struct called `Book` that has properties `title`, `author` and `rating`, of type `String`, `String`, and `Double` respectively. Create some instances of `Book`.
 
+```
+struct Book {
+var title: String
+var author: String
+var rating: Double
+    
+    func isGood (rating: Double ) -> Bool {
+    if rating >= 7 {
+    print("This is a phenominal book")
+        return true
+    }else {
+    print("This book was okay")
+        return false
+    }
+        
+    }
+}
+
+var bookOne = Book(title: "The Bluest Eye", author: "Toni Morrison", rating: 100.100)
+
+var bookTwo = Book(title: "Kinderd", author: "Octavia Butler", rating: 2000.2000)
+```
 
 b. Add a method to `Book` called `isGood` that returns `true` if its rating is greater than or equal to 7
 
+```
+  func isGood (rating: Double ) -> Bool {
+    if rating >= 7 {
+    print("This is a phenominal book")
+        return true
+    }else {
+    print("This book was okay")
+        return false
+    }
+        
+    }
+}
+```
 
 ## Question 8
 
 ```swift
 class Dog {
-
+var name: String
+var breed: String
+var mood: String
+var hungry: Bool
 }
 ```
 
